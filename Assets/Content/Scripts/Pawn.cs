@@ -8,11 +8,12 @@ public class Pawn : MonoBehaviour
     private void Start()
     {
         MoveToCell();
+        ActivateCell();// penser à enlever
     }
 
     public void TryMoving(int value)
     {
-        int NextCellToGo = _board.GetNextCellToMove(_playerData._cellNumber + value);
+        //int NextCellToGo = _board.GetNextCellToMove(_playerData._cellNumber + value);//
         MoveToCell();
         ActivateCell();
     }
