@@ -4,5 +4,5 @@ using UnityEngine;
 public class PlayerDatas : ScriptableObject
 {
     [SerializeField] public int _cellNumber;
-    
+    [SerializeField] public int _money;
 }
