@@ -15,9 +15,18 @@ MonoBehaviour:
   rows:
   - rowNumber: 0
     characterName: Judge
-    longDialogue: 
+    longDialogue: Hi, my great FRIEND. Watch out or your money may Vanish
     nextRowNumber: 1
   - rowNumber: 1
-    characterName: Judge
-    longDialogue: 
+    characterName: Me
+    longDialogue: Vanish ?
     nextRowNumber: 2
+  - rowNumber: 2
+    characterName: Judge
+    longDialogue: YEEAAAH
+    nextRowNumber: 3
+  - rowNumber: 3
+    characterName: Judge
+    longDialogue: yeah... But if you don't break the law everything should be fine
+      when the TaxMen arrives
+    nextRowNumber: -1
