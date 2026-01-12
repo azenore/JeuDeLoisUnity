@@ -6,7 +6,8 @@ public struct DialogueRow
     public string characterName;
     public string longDialogue;
     public int nextRowNumber;
-
+    public bool needGavel;
+    public int alternativeRowNumber;
 }
 
 [CreateAssetMenu(fileName = "DialogueDatas", menuName = "Scriptable Objects/DialogueDatas")]

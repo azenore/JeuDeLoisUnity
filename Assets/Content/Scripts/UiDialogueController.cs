@@ -8,7 +8,7 @@ public class UiDialogueController : MonoBehaviour
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private TMP_Text _characterNameText;
     [SerializeField] private TMP_Text _dialogueText;
-
+    private Pawn _currentPawn;
     private void Start()
     {
         _dialoguePanel.SetActive(false);
@@ -18,6 +18,11 @@ public class UiDialogueController : MonoBehaviour
        _dialogueComponent = dialogueComponent;
         UpdateText();
         _dialoguePanel.SetActive(true);
+    }
+
+    public void SetPawn(Pawn pawn)
+    {
+        _currentPawn = pawn;
     }
 
     public void ChangeRow()

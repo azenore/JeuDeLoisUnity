@@ -12,4 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163df226c56ea0c45b70e24c10488bd7, type: 3}
   m_Name: QuestJudgeDialogue
   m_EditorClassIdentifier: 
-  rows: []
+  rows:
+  - rowNumber: 0
+    characterName: Judge Todd
+    longDialogue: Hi dear friend I have lost my lovely gavel
+    nextRowNumber: 1
+    needGavel: 0
+    alternativeRowNumber: 0
+  - rowNumber: 1
+    characterName: Judge Todd
+    longDialogue: Would you mind bringing it back to me ?
+    nextRowNumber: -1
+    needGavel: 1
+    alternativeRowNumber: 2
+  - rowNumber: 2
+    characterName: Judge Todd
+    longDialogue: Wow that is my precious gavel
+    nextRowNumber: 3
+    needGavel: 0
+    alternativeRowNumber: 0
+  - rowNumber: 3
+    characterName: Judge Todd
+    longDialogue: Thank you dear
+    nextRowNumber: -1
+    needGavel: 0
+    alternativeRowNumber: 0

@@ -9,6 +9,7 @@ public class Pawn : MonoBehaviour
     {
         MoveToCell();
         _playerData._money = 100;
+        _playerData._hasGavel = false;
        // ActivateCell();// penser à enlever
     }
 
