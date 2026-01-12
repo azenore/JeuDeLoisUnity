@@ -18,7 +18,7 @@ MonoBehaviour:
     longDialogue: Hi dear friend I have lost my lovely gavel
     nextRowNumber: 1
     needGavel: 0
-    alternativeRowNumber: 0
+    alternativeRowNumber: 1
   - rowNumber: 1
     characterName: Judge Todd
     longDialogue: Would you mind bringing it back to me ?
@@ -30,10 +30,16 @@ MonoBehaviour:
     longDialogue: Wow that is my precious gavel
     nextRowNumber: 3
     needGavel: 0
-    alternativeRowNumber: 0
+    alternativeRowNumber: 4
   - rowNumber: 3
     characterName: Judge Todd
     longDialogue: Thank you dear
+    nextRowNumber: -1
+    needGavel: 0
+    alternativeRowNumber: 0
+  - rowNumber: 4
+    characterName: Judge Todd
+    longDialogue: I still need my gavel
     nextRowNumber: -1
     needGavel: 0
     alternativeRowNumber: 0

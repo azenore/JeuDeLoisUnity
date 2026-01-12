@@ -27,7 +27,7 @@ public class UiDialogueController : MonoBehaviour
 
     public void ChangeRow()
     {
-        _dialogueComponent.GetNextRow();
+        _dialogueComponent.GetNextRow(_currentPawn);
     }
 
     public void UpdateText()
