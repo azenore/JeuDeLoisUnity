@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SalaryCell : Cell
+public class FineCell : Cell
 {
-    [SerializeField] private int _salaryAmount = 100;
+    [SerializeField] private int _salaryAmount = 60;
 
     public void Action(Pawn currentPawn)
     {
@@ -10,7 +10,7 @@ public class SalaryCell : Cell
 
         if (playerData != null)
         {
-            playerData._money += _salaryAmount;
+            playerData._money -= _salaryAmount;
 
             UiMoneyController uiMoney = FindFirstObjectByType<UiMoneyController>();
             if (uiMoney != null)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows:
   - rowNumber: 0
-    characterName: Judge
+    characterName: Judge Judd
     longDialogue: Hi, my great FRIEND. Watch out or your money may Vanish
     nextRowNumber: 1
   - rowNumber: 1
@@ -22,11 +22,11 @@ MonoBehaviour:
     longDialogue: Vanish ?
     nextRowNumber: 2
   - rowNumber: 2
-    characterName: Judge
+    characterName: Judge Judd
     longDialogue: YEEAAAH
     nextRowNumber: 3
   - rowNumber: 3
-    characterName: Judge
+    characterName: Judge Judd
     longDialogue: yeah... But if you don't break the law everything should be fine
       when the TaxMen arrives
     nextRowNumber: -1

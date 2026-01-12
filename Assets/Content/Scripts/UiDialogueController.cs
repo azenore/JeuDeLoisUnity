@@ -8,6 +8,11 @@ public class UiDialogueController : MonoBehaviour
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private TMP_Text _characterNameText;
     [SerializeField] private TMP_Text _dialogueText;
+
+    private void Start()
+    {
+        _dialoguePanel.SetActive(false);
+    }
     public void StartDialogue(DialogueComponent dialogueComponent)
     {
        _dialogueComponent = dialogueComponent;
@@ -28,7 +33,7 @@ public class UiDialogueController : MonoBehaviour
 
     public void EndDialogue()
     {
-        _dialoguePanel?.SetActive(false);
+        _dialoguePanel.SetActive(false);
     }
 
 }
