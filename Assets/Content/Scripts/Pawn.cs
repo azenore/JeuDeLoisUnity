@@ -8,6 +8,7 @@ public class Pawn : MonoBehaviour
     private void Start()
     {
         MoveToCell();
+        _playerData._money = 100;
        // ActivateCell();// penser à enlever
     }
 

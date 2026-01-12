@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FineCell : Cell
+public class FineCell : MonoBehaviour,IActionnable
 {
     [SerializeField] private int _salaryAmount = 60;
 
