@@ -1,0 +1,24 @@
+using System.IO.Enumeration;
+using UnityEngine;
+
+public class SaveManager : MonoBehaviour
+{
+    [SerializeField ] private GameDatas gameDatas;
+    private SaveController saveController;
+
+    private void Start()
+    {
+        saveController = new SaveController();
+
+    }
+
+    public void SaveGame()
+    {
+        saveController.SaveGameData(gameDatas.datas,"savegame.txt");
+    }
+
+    public void LoadGame()
+    {
+        gameDatas.datas = saveController.LoadGameData("savegame.txt");
+    }
+}
