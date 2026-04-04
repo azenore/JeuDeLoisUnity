@@ -23,13 +23,13 @@ MonoBehaviour:
     characterName: Judge Todd
     longDialogue: Would you mind bringing it back to me ?
     nextRowNumber: -1
-    needGavel: 1
+    needGavel: 0
     alternativeRowNumber: 2
   - rowNumber: 2
     characterName: Judge Todd
     longDialogue: Wow that is my precious gavel
     nextRowNumber: 3
-    needGavel: 0
+    needGavel: 1
     alternativeRowNumber: 4
   - rowNumber: 3
     characterName: Judge Todd

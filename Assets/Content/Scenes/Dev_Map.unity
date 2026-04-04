@@ -3295,7 +3295,6 @@ GameObject:
   - component: {fileID: 5123037908452549745}
   - component: {fileID: 1103575665307167582}
   - component: {fileID: 2981883505023593874}
-  - component: {fileID: 7325999134292417121}
   - component: {fileID: 7325999134292417122}
   m_Layer: 0
   m_Name: DialogueCell2
@@ -4822,20 +4821,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2015866160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7325999134292417121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2787608321018767903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4b34673cde2b84295f808fd6c787ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogueComponent: {fileID: 7325999134292417122}
-  _dialogueController: {fileID: 1416482600}
 --- !u!114 &7325999134292417122
 MonoBehaviour:
   m_ObjectHideFlags: 0
