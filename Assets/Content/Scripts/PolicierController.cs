@@ -1,7 +1,5 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public enum StateType
 {
@@ -10,138 +8,139 @@ public enum StateType
     Follow,
     Catch
 }
+
 public class PolicierController : MonoBehaviour
 {
-    [SerializeField] private StateType state = StateType.None;
-    [SerializeField] private StateType nextState = StateType.None;
-    [SerializeField] private GameObject target;
-    [SerializeField] private GameObject navpoint;
-    [SerializeField] private float attackDistance = 1.5f;
+    [SerializeField] private StateType _state = StateType.None;
+    [SerializeField] private StateType _nextState = StateType.None;
+    [SerializeField] private GameObject _target;
+    [SerializeField] private GameObject _navpoint;
+    [SerializeField] private float _attackDistance = 1.5f;
+
+    private NavMeshAgent _agent;
+    private SightPerception _sightPerception;
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _agent = GetComponent<NavMeshAgent>();
+        _sightPerception = GetComponent<SightPerception>();
+        _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        _nextState = StateType.Patrol;
+        ChangeState();
+    }
+
     private void Update()
     {
         if (TestChangeState())
-        {
             ChangeState();
-        }
+
         BehaviorAction();
     }
 
+ 
     private bool TestChangeState()
     {
-        switch (state)
+        switch (_state)
         {
             case StateType.Patrol:
-                if (GetComponent<SightPerception>().isDetected)
+                if (_sightPerception.isDetected)
                 {
-                    if (Vector3.Distance(target.transform.position, transform.position) <= attackDistance)
-                    {
-                        nextState = StateType.Catch;
-                        return true;
-                    }
-                    else
-                    {
-                        nextState = StateType.Follow;
-                        return true;
-                    }
-                }
-
-                break;
-
-
-            case StateType.Catch:
-                if(!GetComponent<SightPerception>().isDetected)
-                {
-                    nextState = StateType.Patrol;
-                    return true;
-                }
-
-                if (Vector3.Distance(target.transform.position, transform.position)> attackDistance)
-                {
-                    nextState = StateType.Follow;
+                    _nextState = Vector3.Distance(_target.transform.position, transform.position) <= _attackDistance
+                        ? StateType.Catch
+                        : StateType.Follow;
                     return true;
                 }
                 break;
-
 
             case StateType.Follow:
-                if (!GetComponent<SightPerception>().isDetected)
+                if (!_sightPerception.isDetected)
                 {
-                    nextState = StateType.Patrol;
+                    _nextState = StateType.Patrol;
                     return true;
                 }
-
-
-                if (Vector3.Distance(target.transform.position, transform.position) <= attackDistance)
+                if (Vector3.Distance(_target.transform.position, transform.position) <= _attackDistance)
                 {
-                    nextState = StateType.Catch;
+                    _nextState = StateType.Catch;
+                    return true;
+                }
+                break;
+
+            case StateType.Catch:
+                if (!_sightPerception.isDetected)
+                {
+                    _nextState = StateType.Patrol;
+                    return true;
+                }
+                if (Vector3.Distance(_target.transform.position, transform.position) > _attackDistance)
+                {
+                    _nextState = StateType.Follow;
                     return true;
                 }
                 break;
         }
         return false;
-
     }
 
     private void ChangeState()
     {
         EndState();
-        state = nextState;
+        _state = _nextState;
         StartState();
     }
 
     private void EndState()
-    { 
-        switch (state)
+    {
+        switch (_state)
         {
+            case StateType.Patrol:
             case StateType.Follow:
-                GetComponent<NavMeshAgent>().SetDestination(transform.position);   
+                _agent.SetDestination(transform.position);
                 break;
-                case StateType.Patrol:
-                GetComponent<NavMeshAgent>().SetDestination(transform.position);
-                break;
-
         }
     }
 
     private void StartState()
     {
-        switch (state)
+        switch (_state)
         {
             case StateType.Patrol:
-                GetComponent<NavMeshAgent>().speed = 2f;
+                _agent.isStopped = false;
+                _agent.stoppingDistance = 0f;
+                _agent.speed = 2f;
                 break;
 
             case StateType.Follow:
-                GetComponent<NavMeshAgent>().speed = 4f;
+                _agent.isStopped = false;
+                _agent.stoppingDistance = _attackDistance;  
+                _agent.speed = 4f;
+                break;
+
+            case StateType.Catch:
+                _agent.isStopped = true;
+                _agent.SetDestination(transform.position);
+                _animator.SetTrigger("Catch");
+               
                 break;
         }
     }
+
+
     private void BehaviorAction()
     {
-        switch (state)
+        switch (_state)
         {
             case StateType.Patrol:
-                PatrolBehaviour();
+                _agent.SetDestination(_navpoint.transform.position);
                 break;
+
             case StateType.Follow:
-                FollowBehaviour();
+                _agent.SetDestination(_target.transform.position);
                 break;
-            case StateType.Catch:
-                CatchBehaviour();
-                break;
-         
         }
-    }
-   private void PatrolBehaviour()
-    {
-        GetComponent<NavMeshAgent>().SetDestination(navpoint.transform.position);
-    }
-    private void FollowBehaviour()
-    {
-        GetComponent<NavMeshAgent>().SetDestination(target.transform.position);
-    }
-    private void CatchBehaviour()
-    {
-        GetComponent<Animator>().SetTrigger(name:"Catch");
     }
 }

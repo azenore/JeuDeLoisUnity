@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class Pawn : MonoBehaviour
 {
@@ -15,11 +17,21 @@ public class Pawn : MonoBehaviour
 
     public void TryMoving(int value)
     {
-        //int NextCellToGo = _board.GetNextCellToMove(_playerData._cellNumber + value);//
-        _playerData._cellNumber = _board.GetNextCellToMove(_playerData._cellNumber + value);
-        MoveToCell();
+        StartCoroutine(MoveStepByStep(value));
+    }
+
+    private IEnumerator MoveStepByStep(int steps)
+    {
+        for (int i = 0; i < steps; i++)
+        {
+            _playerData._cellNumber = _board.GetNextCellToMove(_playerData._cellNumber + 1);
+            MoveToCell();
+            yield return new WaitForSeconds(0.3f);
+        }
+
         ActivateCell();
     }
+
     private void MoveToCell()
     {
             Transform NewPos = _board.GetCellByNumber(_playerData._cellNumber).transform;  // TODO : get cell number to do
