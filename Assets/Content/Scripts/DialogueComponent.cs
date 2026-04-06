@@ -33,12 +33,7 @@ public class DialogueComponent : MonoBehaviour, IActionnable
 
 
 
-   // public DialogueRow GetDialogueRow()
-  //  {
-   //     return _dialogueData.rows[_currentRowIndex];
-   // }
-
-    public string  GetDialogueText()
+    public string GetDialogueText()
     {
         return _currentRow.longDialogue;
     }

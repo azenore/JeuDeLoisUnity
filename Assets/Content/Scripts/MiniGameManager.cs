@@ -15,10 +15,6 @@ public class MiniGameManager : MonoBehaviour
     private bool _isCaught = false;
     private bool _gameOver = false;
 
-    /// <summary>
-    /// Called by PolicierController.OnPlayerCaught when the officer catches the player.
-    /// Freezes the player, stops the timer, deducts 150 money then loads Dev_Map.
-    /// </summary>
     public void OnPlayerCaught()
     {
         if (_gameOver)
@@ -34,10 +30,6 @@ public class MiniGameManager : MonoBehaviour
         Invoke(nameof(LoadDevMap), GameOverDelay);
     }
 
-    /// <summary>
-    /// Called by MiniGameTimer.OnTimeUp when the 30-second countdown reaches zero.
-    /// Awards 100 money if the player was not caught.
-    /// </summary>
     public void OnTimeUp()
     {
         if (_gameOver)

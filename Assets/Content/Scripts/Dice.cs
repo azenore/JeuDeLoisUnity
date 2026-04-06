@@ -18,9 +18,6 @@ public class Dice : MonoBehaviour
         _diceButton.interactable = !_pawn.IsMoving && !dialogueActive;
     }
 
-    /// <summary>
-    /// Rolls the dice and moves the pawn. Ignored if the pawn is already moving or a dialogue is displayed.
-    /// </summary>
     public void RollTheDice()
     {
         bool dialogueActive = _dialogueController != null && _dialogueController.IsDialogueActive;

@@ -49,9 +49,6 @@ public class Pawn : MonoBehaviour
         cell.Activate(this);
     }
 
-    /// <summary>
-    /// Returns the PlayerDatas ScriptableObject associated with this pawn.
-    /// </summary>
     public PlayerDatas GetPlayerData()
     {
         return _playerData;

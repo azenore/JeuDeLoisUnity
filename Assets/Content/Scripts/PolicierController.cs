@@ -21,10 +21,6 @@ public class PolicierController : MonoBehaviour
     [SerializeField] private float _attackDistance = 1.5f;
     [SerializeField] private float _navpointReachedDistance = 0.5f;
 
-    /// <summary>
-    /// How many of the closest waypoints to consider when picking the next patrol destination.
-    /// A lower value keeps the policier moving locally; a higher value allows longer jumps.
-    /// </summary>
     [SerializeField] private int _nearbyWaypointCandidates = 4;
 
     public UnityEvent OnPlayerCaught;
@@ -43,18 +39,31 @@ public class PolicierController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    private bool _isStarted = false;
+
     private void Start()
     {
-        // Auto-discover all waypoints — no manual Inspector assignment needed.
         _allWaypoints = FindObjectsByType<MiniGameWaypoint>(FindObjectsSortMode.None);
-
         _currentWaypointIndex = Random.Range(0, _allWaypoints.Length);
+
+        _agent.isStopped = true;
+    }
+
+    public void StartPatrol()
+    {
+        if (_isStarted)
+            return;
+
+        _isStarted = true;
         _nextState = StateType.Patrol;
         ChangeState();
     }
 
     private void Update()
     {
+        if (!_isStarted)
+            return;
+
         if (TestChangeState())
             ChangeState();
 
@@ -182,7 +191,6 @@ public class PolicierController : MonoBehaviour
 
         Vector3 currentPos = transform.position;
 
-        // Sort all waypoints by distance, skip the one we're standing on.
         List<(int index, float distance)> candidates = new();
         for (int i = 0; i < _allWaypoints.Length; i++)
         {
@@ -195,7 +203,6 @@ public class PolicierController : MonoBehaviour
 
         candidates.Sort((a, b) => a.distance.CompareTo(b.distance));
 
-        // Pick randomly among the N nearest candidates.
         int poolSize = Mathf.Min(_nearbyWaypointCandidates, candidates.Count);
         _currentWaypointIndex = candidates[Random.Range(0, poolSize)].index;
     }

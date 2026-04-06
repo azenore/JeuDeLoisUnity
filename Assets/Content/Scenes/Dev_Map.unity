@@ -969,7 +969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 2015866159}
   _playerData: {fileID: 11400000, guid: 978f941ab60eef1479addce8ae57c484, type: 2}
-  _dice: {fileID: 0}
+  _dice: {fileID: 1416482599}
 --- !u!1001 &771571329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2858,6 +2858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Breathing Idle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2664098864995057252, guid: d1c5fea2120dfd74289bdd87c4f99b48, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 932604ba1e5c3f846a441e6622ca1110, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

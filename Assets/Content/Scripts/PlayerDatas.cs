@@ -7,34 +7,26 @@ public class PlayerDatas : ScriptableObject
     [SerializeField] public int _money;
     [SerializeField] public bool _hasGavel;
     [SerializeField] public bool _hasGivenGavel;
-    [SerializeField] public bool _isInitialized;
+    private static bool s_isInitialized = false;
 
-    /// <summary>
-    /// Resets all values to their defaults and marks the data as uninitialized.
-    /// Call this to start a new game.
-    /// </summary>
     public void ResetToDefaults()
     {
         _cellNumber = 0;
         _money = 100;
         _hasGavel = false;
         _hasGivenGavel = false;
-        _isInitialized = false;
+        s_isInitialized = false;
     }
 
-    /// <summary>
-    /// Initializes default values only if this is the first time loading.
-    /// Subsequent scene loads preserve the existing values.
-    /// </summary>
     public void InitializeIfNeeded()
     {
-        if (_isInitialized)
+        if (s_isInitialized)
             return;
 
         _cellNumber = 0;
         _money = 100;
         _hasGavel = false;
         _hasGivenGavel = false;
-        _isInitialized = true;
+        s_isInitialized = true;
     }
 }

@@ -12,9 +12,12 @@ public class MiniGameTimer : MonoBehaviour
     private float _remaining;
     private bool _isRunning;
 
+    [SerializeField] private bool _autoStart = true;
+
     private void Start()
     {
-        StartTimer();
+        if (_autoStart)
+            StartTimer();
     }
 
     public void StartTimer()
