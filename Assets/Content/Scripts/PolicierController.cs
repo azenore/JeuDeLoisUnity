@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -15,16 +16,25 @@ public class PolicierController : MonoBehaviour
     [SerializeField] private StateType _state = StateType.None;
     [SerializeField] private StateType _nextState = StateType.None;
     [SerializeField] private GameObject _target;
-    [SerializeField] private GameObject[] _navpoints;
+    [SerializeField] private float _patrolSpeed = 4f;
+    [SerializeField] private float _followSpeed = 6f;
     [SerializeField] private float _attackDistance = 1.5f;
     [SerializeField] private float _navpointReachedDistance = 0.5f;
+
+    /// <summary>
+    /// How many of the closest waypoints to consider when picking the next patrol destination.
+    /// A lower value keeps the policier moving locally; a higher value allows longer jumps.
+    /// </summary>
+    [SerializeField] private int _nearbyWaypointCandidates = 4;
 
     public UnityEvent OnPlayerCaught;
 
     private NavMeshAgent _agent;
     private SightPerception _sightPerception;
     private Animator _animator;
-    private int _currentNavpointIndex = 0;
+
+    private MiniGameWaypoint[] _allWaypoints;
+    private int _currentWaypointIndex = 0;
 
     private void Awake()
     {
@@ -35,7 +45,10 @@ public class PolicierController : MonoBehaviour
 
     private void Start()
     {
-        _currentNavpointIndex = Random.Range(0, _navpoints.Length);
+        // Auto-discover all waypoints — no manual Inspector assignment needed.
+        _allWaypoints = FindObjectsByType<MiniGameWaypoint>(FindObjectsSortMode.None);
+
+        _currentWaypointIndex = Random.Range(0, _allWaypoints.Length);
         _nextState = StateType.Patrol;
         ChangeState();
     }
@@ -122,13 +135,13 @@ public class PolicierController : MonoBehaviour
             case StateType.Patrol:
                 _agent.isStopped = false;
                 _agent.stoppingDistance = 0f;
-                _agent.speed = 2f;
+                _agent.speed = _patrolSpeed;
                 break;
 
             case StateType.Follow:
                 _agent.isStopped = false;
                 _agent.stoppingDistance = 0f;
-                _agent.speed = 4f;
+                _agent.speed = _followSpeed;
                 break;
 
             case StateType.Catch:
@@ -145,18 +158,46 @@ public class PolicierController : MonoBehaviour
         switch (_state)
         {
             case StateType.Patrol:
-                if (_navpoints.Length == 0)
+                if (_allWaypoints.Length == 0)
                     break;
 
-                _agent.SetDestination(_navpoints[_currentNavpointIndex].transform.position);
+                _agent.SetDestination(_allWaypoints[_currentWaypointIndex].transform.position);
 
                 if (!_agent.pathPending && _agent.remainingDistance <= _navpointReachedDistance)
-                    PickRandomNavpoint();
+                    PickNearbyRandomWaypoint();
                 break;
+
             case StateType.Follow:
                 _agent.SetDestination(_target.transform.position);
                 break;
         }
+    }
+
+    // Picks a random waypoint from the N closest to the current position,
+    // excluding the waypoint just visited to avoid immediate back-tracking.
+    private void PickNearbyRandomWaypoint()
+    {
+        if (_allWaypoints.Length <= 1)
+            return;
+
+        Vector3 currentPos = transform.position;
+
+        // Sort all waypoints by distance, skip the one we're standing on.
+        List<(int index, float distance)> candidates = new();
+        for (int i = 0; i < _allWaypoints.Length; i++)
+        {
+            if (i == _currentWaypointIndex)
+                continue;
+
+            float dist = HorizontalDistance(_allWaypoints[i].transform.position, currentPos);
+            candidates.Add((i, dist));
+        }
+
+        candidates.Sort((a, b) => a.distance.CompareTo(b.distance));
+
+        // Pick randomly among the N nearest candidates.
+        int poolSize = Mathf.Min(_nearbyWaypointCandidates, candidates.Count);
+        _currentWaypointIndex = candidates[Random.Range(0, poolSize)].index;
     }
 
     private float HorizontalDistance(Vector3 a, Vector3 b)
@@ -165,17 +206,4 @@ public class PolicierController : MonoBehaviour
         b.y = 0f;
         return Vector3.Distance(a, b);
     }
-    private void PickRandomNavpoint()
-    {
-        if (_navpoints.Length <= 1)
-            return;
-
-        int next;
-        do
-        {
-            next = Random.Range(0, _navpoints.Length);
-        }
-        while (next == _currentNavpointIndex);
-
-        _currentNavpointIndex = next;
-    }}
+}
