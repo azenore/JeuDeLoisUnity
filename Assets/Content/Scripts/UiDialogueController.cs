@@ -13,6 +13,8 @@ public class UiDialogueController : MonoBehaviour
     {
         _dialoguePanel.SetActive(false);
     }
+    public bool IsDialogueActive => _dialoguePanel.activeSelf;
+
     public void StartDialogue(DialogueComponent dialogueComponent)
     {
        _dialogueComponent = dialogueComponent;

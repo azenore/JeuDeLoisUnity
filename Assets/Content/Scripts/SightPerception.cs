@@ -3,26 +3,39 @@ using UnityEngine;
 public class SightPerception : MonoBehaviour
 {
     public bool isDetected = false;
+
     [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float eyeHeight = 1.6f;
     [SerializeField] private GameObject detectionObject;
-    private Vector3 targetDirection;
+
     private void Update()
     {
-        targetDirection = detectionObject.transform.position - transform.position;
-      if  (Vector3.Dot(lhs:transform.forward, rhs:Vector3.Normalize(targetDirection)) > 0 )
+        Vector3 eyePosition = transform.position + Vector3.up * eyeHeight;
+        Vector3 targetCenter = detectionObject.transform.position + Vector3.up * 0.9f;
+        Vector3 targetDirection = targetCenter - eyePosition;
+
+        if (Vector3.Dot(transform.forward, targetDirection.normalized) > 0f)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(origin: transform.position, targetDirection, out hit, detectionRadius))
+            if (Physics.Raycast(eyePosition, targetDirection, out RaycastHit hit, detectionRadius))
             {
-                if (hit.collider.gameObject == detectionObject)
+                if (hit.collider.gameObject == detectionObject
+                    || hit.collider.transform.IsChildOf(detectionObject.transform))
                 {
                     isDetected = true;
                     return;
                 }
-               
             }
-            
         }
-      isDetected = false;
+
+        isDetected = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 eyePosition = transform.position + Vector3.up * eyeHeight;
+        Gizmos.color = isDetected ? Color.red : Color.yellow;
+        Gizmos.DrawWireSphere(eyePosition, detectionRadius);
+        if (detectionObject != null)
+            Gizmos.DrawLine(eyePosition, detectionObject.transform.position + Vector3.up * 0.9f);
     }
 }
