@@ -414,6 +414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Policier
       objectReference: {fileID: 0}
+    - target: {fileID: 2664098864995057252, guid: f18a0ce91aa47f3449b7588af35eb53e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c35ac6c295423bc4790e3c1e1274e9bf, type: 2}
     - target: {fileID: 5866666021909216657, guid: f18a0ce91aa47f3449b7588af35eb53e, type: 3}
       propertyPath: m_Controller
       value: 
@@ -2314,6 +2318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Policier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2664098864995057252, guid: f18a0ce91aa47f3449b7588af35eb53e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c35ac6c295423bc4790e3c1e1274e9bf, type: 2}
     - target: {fileID: 5866666021909216657, guid: f18a0ce91aa47f3449b7588af35eb53e, type: 3}
       propertyPath: m_Controller
       value: 
@@ -5116,6 +5124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7102978932659609604, guid: 7df75eee2be6d0842a4d1e961ffcb718, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7d2b572055d8334cb176f46c9bc8d21, type: 2}
     - target: {fileID: 7328704386095382453, guid: 7df75eee2be6d0842a4d1e961ffcb718, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

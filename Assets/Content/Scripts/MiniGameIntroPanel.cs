@@ -28,3 +28,4 @@ public class MiniGameIntroPanel : MonoBehaviour
             policier.StartPatrol();
     }
 }
+

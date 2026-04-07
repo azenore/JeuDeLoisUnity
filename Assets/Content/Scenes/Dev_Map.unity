@@ -1031,6 +1031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 4cb51b984740aaa4aa465480e748b0d4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c9b0afa0164d1d458bad068cdbc5a5c, type: 2}
     - target: {fileID: 919132149155446097, guid: 4cb51b984740aaa4aa465480e748b0d4, type: 3}
       propertyPath: m_Name
       value: judge_gavel
@@ -3748,6 +3752,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Breathing Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 2664098864995057252, guid: d1c5fea2120dfd74289bdd87c4f99b48, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 932604ba1e5c3f846a441e6622ca1110, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5314,6 +5322,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7102978932659609604, guid: 7df75eee2be6d0842a4d1e961ffcb718, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c7d2b572055d8334cb176f46c9bc8d21, type: 2}
     - target: {fileID: 7328704386095382453, guid: 7df75eee2be6d0842a4d1e961ffcb718, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
