@@ -8,5 +8,5 @@ Le mini jeu est simple il faut clicker sur les carrés de couleurs pour fuir les
 
 
 
-
+A terme j'aimerais que ce jeu ai plus de mécaniques autours des lois et des règles et plus de mini jeux décallés.
 
