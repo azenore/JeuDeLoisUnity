@@ -8,6 +8,7 @@ public class Dice : MonoBehaviour
     [SerializeField] private TMP_Text _diceResultText;
     [SerializeField] private Button _diceButton;
     [SerializeField] private UiDialogueController _dialogueController;
+    [SerializeField] private GameIntroPanel _introPanel;
 
     private void Update()
     {
@@ -15,14 +16,16 @@ public class Dice : MonoBehaviour
             return;
 
         bool dialogueActive = _dialogueController != null && _dialogueController.IsDialogueActive;
-        _diceButton.interactable = !_pawn.IsMoving && !dialogueActive;
+        bool introOpen = _introPanel != null && _introPanel.IsOpen;
+        _diceButton.interactable = !_pawn.IsMoving && !dialogueActive && !introOpen;
     }
 
     public void RollTheDice()
     {
         bool dialogueActive = _dialogueController != null && _dialogueController.IsDialogueActive;
+        bool introOpen = _introPanel != null && _introPanel.IsOpen;
 
-        if (_pawn.IsMoving || dialogueActive)
+        if (_pawn.IsMoving || dialogueActive || introOpen)
             return;
 
         int value = Random.Range(1, 7);
